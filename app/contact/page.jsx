@@ -3,16 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { useState } from "react";
 
 import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 
@@ -38,6 +29,53 @@ const info = [
 import { motion } from "framer-motion";
 
 const Contact = () => {
+  const [selected, setSelected] = useState(false);
+  const [service, setService] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const name = `${form.firstName.value} ${form.lastName.value}`;
+    const email = form.email.value;
+    const phone = form.phone.value || "-";
+    const service = form.service.value || "-";
+    const message = form.message.value;
+
+    const subject = `Ketertarikan Kandidat untuk Posisi ${service}`;
+
+    const body = `
+        Halo Akbar Rizky Rabbani,
+
+        Saya ${name}, ingin menyampaikan ketertarikan saya untuk posisi ${service} di perusahaan Anda.
+
+        Berikut detail saya:
+        - Nama: ${name}
+        - Email: ${email}
+        - No. Telepon: ${phone}
+        - Posisi yang diminati: ${service}
+
+        Pesan tambahan:
+        ${message}
+
+        Terima kasih atas kesempatannya. Saya tunggu kabar baik dari Anda.
+
+        Hormat saya,  
+        ${name}
+        `;
+
+    const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=arrizki0098@gmail.com&su=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    window.open(gmailURL, "_blank");
+  };
+
+  const handleClick = () => {
+    setService("Front End Developer");
+    setSelected(true);
+  };
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -50,35 +88,61 @@ const Contact = () => {
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row gap-[30px]">
           <div className="xl:h-[54%] order-2 xl:order-none">
-            <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
+            <form
+              onSubmit={handleSubmit}
+              action="mailto:duniaduel21@gmail.com"
+              method="POST"
+              encType="text/plain"
+              className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
+            >
               <h3 className="text-4xl text-accent">Let&apos;s Work Together</h3>
-              <p className="text-white/60">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                ea sed maiores a animi eius, quos, in architecto non
-                voluptatibus rerum reprehenderit!
-              </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input placeholder="First Name" type="firstname" />
-                <Input placeholder="Last Name" type="firstname" />
-                <Input placeholder="Email" type="Email Address" />
-                <Input placeholder="Phone" type="Phone Number" />
+                <Input
+                  name="firstName"
+                  placeholder="First Name"
+                  type="text"
+                  required
+                />
+                <Input
+                  name="lastName"
+                  placeholder="Last Name"
+                  type="text"
+                  required
+                />
+                <Input name="email" placeholder="Email" type="email" required />
+                <Input name="phone" placeholder="Phone" type="tel" />
               </div>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select A Service"></SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Select A Service</SelectLabel>
-                    <SelectItem value="est">Front End Developer</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+
+              {/* Replace Select with hidden input + buttons */}
+              <div>
+                <input
+                  type="hidden"
+                  name="service"
+                  id="selectedService"
+                  value={service}
+                />
+                <p className="text-white mb-2">Select A Service:</p>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    className={`px-4 py-2 rounded-md ${
+                      selected ? "bg-accent-hover" : "bg-primary"
+                    }`}
+                    onClick={handleClick}
+                  >
+                    Front End Developer
+                  </button>
+                </div>
+              </div>
+
               <Textarea
+                name="message"
                 className="h-[200px]"
                 placeholder="Tulis Pesan Disini"
+                required
               />
-              <Button size="md" className="max-w-40">
+
+              <Button size="md" type="submit" className="max-w-40">
                 Send Message
               </Button>
             </form>

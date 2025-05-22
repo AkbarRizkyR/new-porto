@@ -25,7 +25,7 @@ const Home = () => {
             {/* btn & sosial */}
             <div className="flex flex-col xl:flex-row items-center gap-8">
               <a
-                href="https://drive.google.com/uc?export=download&id=1pDfVLWgIBQH84kMfbxhNvEQzv4kZ4C4f" // Replace FILE_ID with your actual file ID
+                href="https://drive.google.com/file/d/1Wes1CWecx5j3uQ0kXc-1F3bwgVG3YgUu/view?usp=sharing" // Replace FILE_ID with your actual file ID
                 target="_blank"
                 rel="noopener noreferrer"
                 className="uppercase flex items-center gap-2"
