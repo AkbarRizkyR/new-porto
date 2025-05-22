@@ -38,6 +38,7 @@ const Contact = () => {
 
     const name = `${form.firstName.value} ${form.lastName.value}`;
     const email = form.email.value;
+    const company = form.company.value;
     const phone = form.phone.value || "-";
     const service = form.service.value || "-";
     const message = form.message.value;
