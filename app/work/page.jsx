@@ -54,6 +54,22 @@ const projects = [
     live: "https://topupgamingcore.vercel.app/",
     github: "https://github.com/AkbarRizkyR/try-new",
   },
+  {
+    num: "03",
+    category: "Front End Developer",
+    Title: "Vendor Management System (VMS)",
+    Description:
+      "Aplikasi berbasis web untuk mengelola vendor/penyedia terafiliasi PLN secara terpusat. Fitur mencakup pendaftaran vendor, verifikasi dokumen, & penilaian kinerja. Dibangun dengan integrasi ke sistem internal PLN untuk memastikan compliance dan efisiensi proses procuremen",
+    stack: [
+      { name: "HTML5" },
+      { name: "CSS3" },
+      { name: "JavaScript" },
+      { name: "Vue 3" },
+      { name: "Tailwind CSS" },
+    ],
+    image: "/PLN.png",
+    live: "https://vms.pln.co.id",
+  },
 ];
 
 const Work = () => {
@@ -66,7 +82,10 @@ const Work = () => {
   return (
     <motion.section
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { delay: 2.4, duration: 0.5, ease: "easeIn" } }}
+      animate={{
+        opacity: 1,
+        transition: { delay: 2.4, duration: 0.5, ease: "easeIn" },
+      }}
       className="min-h-[80vh] flex flex-col justify-center py-12 xl:px-0"
     >
       <div className="container mx-auto">
@@ -105,18 +124,20 @@ const Work = () => {
                     </Tooltip>
                   </TooltipProvider>
                 </Link>
-                <Link href={project.live}>
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsGithub className="text-white text-3xl group-hover:text-accent"></BsGithub>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Github Repository</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
+                {project.github && (
+                  <Link href={project.github}>
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
+                          <BsGithub className="text-white text-3xl group-hover:text-accent"></BsGithub>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Github Repository</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -128,23 +149,26 @@ const Work = () => {
               onSlideChange={handleSlideChange}
             >
               {projects.map((project, index) => {
-                return <SwiperSlide key={index} className="w-full">
-                  <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20">
-                    <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10"></div>
-                    <div className="relative w-full h-full">
-                      <Image
-                        src={project.image}
-                        fill
-                        className="object-cover"
-                        alt=""
+                return (
+                  <SwiperSlide key={index} className="w-full">
+                    <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20">
+                      <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10"></div>
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={project.image}
+                          fill
+                          className="object-cover"
+                          alt=""
                         />
+                      </div>
                     </div>
-                  </div>
-
-                </SwiperSlide>;
+                  </SwiperSlide>
+                );
               })}
-              <WorkSliderBtns containerStyles="flex gap-2 absolute right-0 botton-[calc(50%_-_22px) xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none" 
-              btnStyles="bg-accent hover:bg-accent-hover text-[22px] w-[44px] h-[44px] flex justify-center items-center transition-all text-primary" />
+              <WorkSliderBtns
+                containerStyles="flex gap-2 absolute right-0 botton-[calc(50%_-_22px) xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
+                btnStyles="bg-accent hover:bg-accent-hover text-[22px] w-[44px] h-[44px] flex justify-center items-center transition-all text-primary"
+              />
             </Swiper>
           </div>
         </div>
