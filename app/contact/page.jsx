@@ -47,12 +47,13 @@ const Contact = () => {
     const body = `
         Halo Akbar Rizky Rabbani,
 
-        Saya ${name}, ingin menyampaikan ketertarikan saya untuk posisi ${service} di perusahaan Anda.
+        Saya ${name}, ingin menyampaikan ketertarikan saya untuk posisi ${service} di perusahaan Kami.
 
         Berikut detail saya:
         - Nama: ${name}
         - Email: ${email}
         - No. Telepon: ${phone}
+        - Perussahaan: ${company}
         - Posisi yang diminati: ${service}
 
         Pesan tambahan:
@@ -110,6 +111,7 @@ const Contact = () => {
                   required
                 />
                 <Input name="email" placeholder="Email" type="email" required />
+                <Input name="company" placeholder="Company" type="text" />
                 <Input name="phone" placeholder="Phone" type="tel" />
               </div>
 
